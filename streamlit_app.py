@@ -42,8 +42,8 @@ def get_ranking(scores, names):
 # ---- Streamlit UI ---- #
 st.title("🎓 寮祭採点集計ツール")
 
-json_file = st.file_uploader("サービスアカウントJSONをアップロード", type="json")
-spreadsheet_url = st.text_input("スプレッドシートのURLを入力")
+json_file = "C:/Users/rinry/Downloads/service_account.json"
+spreadsheet_url = "https://docs.google.com/spreadsheets/d/1_wYmDxcOdwTIEufJFnkT-WXPMBN22DqgR0YSVfia0K8/edit?usp=sharin"
 
 floors = st.number_input("階（グループ）の数", min_value=1, step=1)
 judges = st.number_input("審査員の数", min_value=1, step=1)
