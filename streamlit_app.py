@@ -10,8 +10,8 @@ SCOPES = [
     'https://www.googleapis.com/auth/drive'
 ]
 def get_sheet_data(spreadsheet_url):
-    credentials = Credentials.from_service_account_file(
-    "C:/Users/rinry/Downloads/service_account.json",#ここのパスを自分のパスに書き換える！！！！！！！
+    credentials = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=SCOPES
     )
 
