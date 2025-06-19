@@ -9,9 +9,15 @@ SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
 ]
-def get_sheet_data(json_file, spreadsheet_url):
-    credentials = Credentials.from_service_account_info(json_file, scopes=SCOPES)
+def get_sheet_data(spreadsheet_url):
+    credentials = Credentials.from_service_account_file(
+    "C:/Users/rinry/Downloads/service_account.json",#ここのパスを自分のパスに書き換える！！！！！！！
+    scopes=SCOPES
+    )
+
+
     gc = gspread.authorize(credentials)
+
     sheet = gc.open_by_url(spreadsheet_url).sheet1
     return sheet.get_all_values()
 
@@ -19,10 +25,10 @@ def get_sheet_data(json_file, spreadsheet_url):
 def parse_scores(data, floors, judges):
     names, total_scores, funny_scores, quality_scores, cute_scores = [], [], [], [], []
     a=0
-    for j in range(judges):
+    for j in range(int(judges)):
         a=a+1
         b=0
-        for i in range(floors):
+        for _ in range(int(floors)):
             if j==0:
                 names.append(data[a][b+1])
             total_scores.append(float(data[a][2+b])+float(data[a][3+b])+float(data[a][4+b])+float(data[a][5+b])+float(data[a][6+b]))
@@ -56,11 +62,9 @@ title_cute = st.text_input("３つ目の賞名", value="かわいい")
 
 
 
-if json_file and spreadsheet_url and floors and judges:
+if spreadsheet_url and floors and judges:
     try:
-        import json
-        json_data = json.load(json_file)
-        data = get_sheet_data(json_data, spreadsheet_url)
+        data = get_sheet_data(spreadsheet_url)
         names, t, f, q, c = parse_scores(data, floors, judges)
         sum_t = summarize(t, floors, judges)
         sum_f = summarize(f, floors, judges)
