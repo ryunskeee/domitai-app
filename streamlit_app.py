@@ -31,8 +31,7 @@ def parse_scores(data, floors, judges):
         for _ in range(int(floors)):
             if j==0:
                 names.append(data[a][b+1])
-            total_scores.append(float(data[a][2+b])+float(data[a][3+b])+float(data[a][4+b])+float(data[a][5+b])+float(data[a][6+b]))
-            funny_scores.append(float(data[a][2+b])+float(data[a][3+b])+(float(data[a][5+b])*1.5))
+            total_scores.append(float(data[a][2+b])+float(data[a][3+b])+float(data[a][4+b])+float(data[a][5+b]*0.8)+float(data[a][6+b]*0.8))
             quality_scores.append(float(data[a][2+b])+(float(data[a][3+b]))+(float(data[a][4+b])*1.5))
             cute_scores.append(float(data[a][2+b])+float(data[a][3+b])+float(data[a][6+b])*1.5)
             b=b+6
@@ -54,11 +53,10 @@ spreadsheet_url = "https://docs.google.com/spreadsheets/d/1_wYmDxcOdwTIEufJFnkT-
 floors = st.number_input("階（グループ）の数", min_value=1, step=1)
 judges = st.number_input("審査員の数", min_value=1, step=1)
 
-title_funny = st.text_input("１つ目の賞名", value="もうええでしょう")
 
-title_quality = st.text_input("2つ目の賞名", value="ひつじの賞")
+title_quality = st.text_input("1つ目の賞名", value="冷え賞")
 
-title_cute = st.text_input("３つ目の賞名", value="かわいい")
+title_cute = st.text_input("2つ目の賞名", value="可愛すぎて滅")
 
 
 
